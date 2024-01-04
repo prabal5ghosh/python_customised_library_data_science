@@ -1,4 +1,6 @@
 import pandas as pd
+#%matplotlib inline
+
 import matplotlib.pyplot as plt
 
 class CSVPlotter:
@@ -21,7 +23,9 @@ class CSVPlotter:
         data = self.data
         if data is not None:
             plt.figure(figsize=(8, 6))
-            plt.plot(data[x_column], data[y_column])
+            #plt.plot(data[x_column], data[y_column])
+            data.plot(kind='line', x=x_column, y=x_column)
+
             plt.title(title)
             plt.xlabel(x_column)
             plt.ylabel(y_column)
@@ -34,7 +38,10 @@ class CSVPlotter:
 
         if data is not None:
             plt.figure(figsize=(8, 6))
-            plt.bar(data[x_column], data[y_column])
+            #plt.bar(data[x_column], data[y_column])
+            #plt.bar(data[x_column], data[x_column].value_counts())
+            data[x_column].value_counts().plot(kind='bar',color='red')
+
             plt.title(title)
             plt.xlabel(x_column)
             plt.ylabel(y_column)
@@ -48,15 +55,15 @@ class CSVPlotter:
 
         if data is not None:
             plt.figure(figsize=(8, 6))
-            plt.scatter(data[x_column], data[y_column])
+            #plt.scatter(data[x_column], data[y_column])
+            data.plot(kind='scatter', x=x_column, y=y_column)
             plt.title(title)
             plt.xlabel(x_column)
             plt.ylabel(y_column)
             plt.grid(True)
             plt.show()
 
-# Example usage:
-# file_path = 'example.csv'
+
 
 # file_path = 'C:\\Users\\praba\\Desktop\\uca1\\M1\\python-ml\\sales_data.csv'
 
@@ -71,13 +78,14 @@ class CSVPlotter:
 # Plot Scatter Plot
 # csv_plotter.plot_scatter_plot('Year', 'Customer_Age', title='Scatter Plot Example')
 
-def plot_line_bar_scatter(data, x_axis, y_axis, type):
+def plot_line_bar_scatter(data, x_axis, y_axis=None, plot_type='bar'):
+
     csv_plotter = CSVPlotter(data)
-    if type == 'line':
+    if plot_type == 'line':
         csv_plotter.plot_line_chart(x_axis , y_axis, title='Line Chart Example')
-    elif type == 'bar':
+    elif plot_type == 'bar':
         csv_plotter.plot_bar_chart(x_axis , y_axis, title='Bar Chart Example')
-    elif type == 'scatter':
+    elif plot_type == 'scatter':
         csv_plotter.plot_scatter_plot(x_axis , y_axis, title='Scatter Plot Example')
     else:
         print("please choose type= line or bar or scatter")

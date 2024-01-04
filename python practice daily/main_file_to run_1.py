@@ -16,4 +16,4 @@ file2 = file_opening(file_path='C:\\Users\\praba\\Desktop\\uca1\\M1\\python-ml\\
 
 
 
-plot_line_bar_scatter(data=file2, x_axis='Year', y_axis='Customer_Age', type='scatter')
+plot_line_bar_scatter(data=file2, x_axis='Year', y_axis='Customer_Age', plot_type='bar')
