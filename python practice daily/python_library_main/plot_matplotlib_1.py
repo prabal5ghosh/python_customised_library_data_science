@@ -2,6 +2,7 @@ import pandas as pd
 #%matplotlib inline
 
 import matplotlib.pyplot as plt
+from matplotlib import cm
 
 class CSVPlotter:
     # def __init__(self, file_path):
@@ -62,8 +63,11 @@ class CSVPlotter:
             plt.ylabel(y_column)
             plt.grid(True)
             plt.show()
-
-
+            
+    def plot_pair_plot(self,data,c=None, marker='o',bins=15):
+        cmap = cm.get_cmap('gnuplot')
+        pd.plotting.scatter_matrix(data, c=c, marker= marker, hist_kwds={'bins': bins}, cmap=cmap, figsize=(12,12))
+        plt.show()
 
 # file_path = 'C:\\Users\\praba\\Desktop\\uca1\\M1\\python-ml\\sales_data.csv'
 
@@ -78,7 +82,7 @@ class CSVPlotter:
 # Plot Scatter Plot
 # csv_plotter.plot_scatter_plot('Year', 'Customer_Age', title='Scatter Plot Example')
 
-def plot_line_bar_scatter(data, x_axis, y_axis=None, plot_type='bar'):
+def plot_line_bar_scatter(data, x_axis, y_axis=None,c=None, marker= None, bins=None, plot_type='bar'):
 
     csv_plotter = CSVPlotter(data)
     if plot_type == 'line':
@@ -87,6 +91,8 @@ def plot_line_bar_scatter(data, x_axis, y_axis=None, plot_type='bar'):
         csv_plotter.plot_bar_chart(x_axis , y_axis, title='Bar Chart Example')
     elif plot_type == 'scatter':
         csv_plotter.plot_scatter_plot(x_axis , y_axis, title='Scatter Plot Example')
+    elif plot_type == 'pair':
+        csv_plotter.plot_pair_plot(data ,c, marker, bins)
     else:
         print("please choose type= line or bar or scatter")
 
