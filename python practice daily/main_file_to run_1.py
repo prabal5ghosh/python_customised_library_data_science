@@ -29,7 +29,7 @@ target_data = df_file2.iloc[:, -1]  # Assuming the target column is the last col
 
 
 # Splitting the data
-X_train, X_test, y_train, y_test = split_data(data=x_data, target=target_data, random_state=32)
+X_train, X_test, y_train, y_test = split_data(data=x_data, target=target_data,test_size=0.3, random_state=32)
 
 # Now you can use X_train, X_test, y_train, y_test for further processing
 
