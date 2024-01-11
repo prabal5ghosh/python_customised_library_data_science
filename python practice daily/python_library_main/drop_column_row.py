@@ -7,19 +7,34 @@ class Data_drop():
         self.col_row=col_row
         self.axis=axis
     def drop_column(self):
-        df = self.data.drop(self.col_row, self.axis)
-        return df
+        try:
+            df = self.data.drop(labels= self.col_row, axis= self.axis)
+            return df
+        except Exception as e:
+            print(f"Error occured: {str(e)}")
+            # raise
     def drop_row(self):
-        df = self.data.drop(self.col_row, self.axis)
-        return df
+        try:
+            df = self.data.drop(labels = self.col_row,axis =  self.axis)
+            return df
+        except Exception as e:
+            print(f"Error occured: {str(e)}")
+            # raise
 
 
 def drop_row(data,col_row):
-    object_drop = Data_drop(data,col_row,axis=0)
-    return object_drop.drop_row()
+    try:
+        object_drop = Data_drop(data,col_row,axis=0)
+        return object_drop.drop_row()
+    except Exception as e:
+            print(f"Error occured: {str(e)}")
+            # raise
 
 def drop_column(data,col_row):
-    object_drop = Data_drop(data,col_row,axis=1)
-    return object_drop.drop_column()
-
+    try:
+        object_drop = Data_drop(data,col_row,axis=1)
+        return object_drop.drop_column()
+    except Exception as e:
+        print(f"Error occured: {str(e)}")
+        # raise
     
