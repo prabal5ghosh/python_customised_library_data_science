@@ -1,16 +1,15 @@
-# from python_library_main import area_cal as ac
+# from python_library_main import mathes_operation as ac
 
-# ac.area_rectangle(4,5)
+
 
 """IMPORT MODULES"""
-from python_library_main.area_cal import *
+from python_library_main.mathes_operation import *
 from python_library_main.open_file import *
 from python_library_main.plot_matplotlib_1 import *
 from python_library_main.train_test_data import *
 from python_library_main.drop_column_row import *
 from python_library_main.my_regex_library import *
 from python_library_main.nan_value_operation import *
-# area_rectangle(4,5)
 
 
 """ OPEN CSV JSON EXCEL DATA"""
@@ -94,3 +93,26 @@ energy_df = file_opening("C:\\Users\\praba\\Desktop\\uca1\\M1\\ML\\final project
 # result = db.select_data('example_table')
 # print("Selected data:", result)
 # db.close_connection()
+
+
+
+"""Different maths operation"""
+
+
+# data = {'column1': [1, 2, 3, 4, 5],
+#         'column2': [5, 4, 3, 2, 1]}
+#
+# df = pd.DataFrame(data)
+
+
+math_operations = MathOperations(energy_df)
+
+mean_value = math_operations.calculate_mean(column_name="energy_star_rating")
+mode_value = math_operations.calculate_mode(column_name="energy_star_rating")
+median_value = math_operations.calculate_median(column_name="energy_star_rating")
+sum_value = math_operations.calculate_sum(column_name="energy_star_rating")
+
+print("Mean:", mean_value)
+print("Mode:", mode_value)
+print("Median:", median_value)
+print("Sum:", sum_value)
