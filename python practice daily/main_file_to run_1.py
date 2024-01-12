@@ -12,6 +12,9 @@ from python_library_main.my_regex_library import *
 from python_library_main.nan_value_operation import *
 from python_library_main.dataframe_operation import *
 from python_library_main.modify_colimn_data import *
+from python_library_main.seaborn_plot import *
+from python_library_main.numerical_categorial_text import *
+from python_library_main.check_outlaiers import *
 
 """ OPEN CSV JSON EXCEL DATA"""
 # df_file1 = file_opening(file_path='C:\\Users\\praba\\Desktop\\uca1\\M1\\python-ml\\file_example_XLSX_50.XLSX', file_type='XLSX')
@@ -27,6 +30,8 @@ energy_df = file_opening("C:\\Users\\praba\\Desktop\\uca1\\M1\\ML\\final project
 """ DIFFERENT PLOTS USING MATPLOTLIB"""
 
 # plot_line_bar_scatter(data=df_file2, x_axis='Year', y_axis='Customer_Age', plot_type='pair',c=file2['Revenue'], marker= "*", bins=30)
+
+
 
 
 """DATA SPLITTING OPERATION"""
@@ -53,10 +58,14 @@ else:
 
 
 
+
+
 """ROW COLUMN DROP OPERATIONS"""
 df_file_2_new_col = drop_column(df_file2, df_file2.columns[[1,2]])
 
 df_file_2_new_row = drop_row(df_file2, [0,1])
+
+
 
 
 """REGEX OPERATIONS"""
@@ -71,6 +80,8 @@ print(after_removal_rows)
 
 regex_operations.modify_data(column_name = 'State_Factor', pattern=r'\d+', replacement= 'REPLACED')
 print(energy_df)
+
+
 
 
 """ HANDLING MISSING VALUES IN DATAFRAME"""
@@ -104,9 +115,6 @@ print(null_counts)
 
 """Different maths operation"""
 
-
-
-
 math_operations = MathOperations(energy_df)
 
 mean_value = math_operations.calculate_mean(column_name="energy_star_rating")
@@ -118,6 +126,8 @@ print("Mean:", mean_value)
 print("Mode:", mode_value)
 print("Median:", median_value)
 print("Sum:", sum_value)
+
+
 
 
 """Different dataframe operations"""
@@ -136,6 +146,8 @@ filtered_rows = df_operations.filter_rows('Year_Factor == 2 ')
 encoded_df = df_operations.dataframe_one_hot('Year_Factor')
 
 
+
+
 "MODIFY COLUMNS DATA"
 # Use the custom library function to modify a specific column
 modify_col_obj= ModifyColumn(energy_df)
@@ -147,3 +159,42 @@ modified_df = modify_col_obj.modify_column( 'building_class', modify_building_cl
 
 print("DataFrame after applying the function to column 'building_class':")
 print(modified_df)
+
+
+"""NUMERICAL CATEGORICAL TEXT DATA COLUMNS NAME """
+
+feature_categorizer = FeatureCategorizer(energy_df)
+
+    # Call the categorize_features method
+result = feature_categorizer.categorize_features()
+
+# Print the result
+if isinstance(result, dict):
+    for category, features in result.items():
+        print(f"{category}:\n{features}")
+else:
+    print(result)
+
+
+
+
+"""SEABORN PLOTS - BOX PLOT HIST PLOT"""
+
+plotter = SeabornBoxPlotter()
+Num_features = result['Numerical_Features']
+# plotter.plot_boxplots(energy_df, Num_features)
+
+# plotter.plot_histplots(energy_df)
+
+
+
+"""Chcek OUTLAIERS"""
+
+outliers_checker = OutlaiersCheck(energy_df)
+num_features = result['Numerical_Features']
+outliers = outliers_checker.check_outlaiers(num_features)
+# Print the outliers
+print("Outliers:")
+for feature, values in outliers.items():
+    print(f"{feature}: {values}")
+    print("\n")
