@@ -1,5 +1,4 @@
 import sqlite3
-database_name = 'prabal_dbms.db'
 
 class DatabaseUtils:
     def __init__(self, database_name):
@@ -45,11 +44,29 @@ class DatabaseUtils:
             print(f"Error updating data: {str(e)}")
             raise
 
-    def select_data(self, table_name, columns="*", condition=None):
+    def delete_row(self, table_name, condition):
+        try:
+            query = f"DELETE FROM {table_name} WHERE {condition}"
+            self.cursor.execute(query)
+            self.connection.commit()
+            print("Row deleted successfully.")
+
+        except Exception as e:
+            print(f"Error deleting row: {str(e)}")
+            raise
+
+    def select_data(self, table_name, columns="*", condition=None, group_by=None, order_by=None):
         try:
             query = f"SELECT {columns} FROM {table_name}"
+
             if condition:
                 query += f" WHERE {condition}"
+
+            if group_by:
+                query += f" GROUP BY {group_by}"
+
+            if order_by:
+                query += f" ORDER BY {order_by}"
 
             self.cursor.execute(query)
             result = self.cursor.fetchall()
@@ -67,5 +84,4 @@ class DatabaseUtils:
         except Exception as e:
             print(f"Error closing connection: {str(e)}")
             raise
-
 

@@ -15,6 +15,9 @@ from python_library_main.modify_colimn_data import *
 from python_library_main.seaborn_plot import *
 from python_library_main.numerical_categorial_text import *
 from python_library_main.check_outlaiers import *
+from python_library_main.database_utils import *
+from python_library_main.dbms_professor import *
+
 
 """ OPEN CSV JSON EXCEL DATA"""
 # df_file1 = file_opening(file_path='C:\\Users\\praba\\Desktop\\uca1\\M1\\python-ml\\file_example_XLSX_50.XLSX', file_type='XLSX')
@@ -198,3 +201,17 @@ print("Outliers:")
 for feature, values in outliers.items():
     print(f"{feature}: {values}")
     print("\n")
+
+
+# """ Database operations"""
+
+
+
+# db = DatabaseUtils('prabal_dbms.db')
+# db.create_table('student_data1', ['id INTEGER', 'name TEXT', 'age INTEGER'])
+# db.insert_data('student_data1', (1, 'John Doe', 25))
+# db.update_data('student_data1', {'age': 26}, 'id = 1')
+# db.delete_row('student_data1', 'id = 1')
+# result = db.select_data('student_data1')
+# print("Selected data:", result)
+# db.close_connection()
