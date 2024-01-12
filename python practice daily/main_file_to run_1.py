@@ -11,6 +11,7 @@ from python_library_main.drop_column_row import *
 from python_library_main.my_regex_library import *
 from python_library_main.nan_value_operation import *
 from python_library_main.dataframe_operation import *
+from python_library_main.modify_colimn_data import *
 
 """ OPEN CSV JSON EXCEL DATA"""
 # df_file1 = file_opening(file_path='C:\\Users\\praba\\Desktop\\uca1\\M1\\python-ml\\file_example_XLSX_50.XLSX', file_type='XLSX')
@@ -133,3 +134,16 @@ summary_stats = df_operations.calculate_summary_statistics()
 filtered_rows = df_operations.filter_rows('Year_Factor == 2 ')
 # encoded_column = df_operations.encode_categorical_variable('Year_Factor')
 encoded_df = df_operations.dataframe_one_hot('Year_Factor')
+
+
+"MODIFY COLUMNS DATA"
+# Use the custom library function to modify a specific column
+modify_col_obj= ModifyColumn(energy_df)
+
+def modify_building_class(building_class):
+    return 1 if building_class == 'Commercial' else 0
+
+modified_df = modify_col_obj.modify_column( 'building_class', modify_building_class)
+
+print("DataFrame after applying the function to column 'building_class':")
+print(modified_df)
